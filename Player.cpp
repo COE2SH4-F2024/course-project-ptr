@@ -5,7 +5,7 @@ Player::Player(GameMechs* thisGMRef)
 {
     mainGameMechsRef = thisGMRef;
     myDir = STOP;
-
+ 
     // more actions to be included
 }
 

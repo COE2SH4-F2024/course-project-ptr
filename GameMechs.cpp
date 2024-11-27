@@ -7,7 +7,7 @@ GameMechs::GameMechs()
 
 GameMechs::GameMechs(int boardX, int boardY)
 {
-    
+     
 }
 
 // do you need a destructor?

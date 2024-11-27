@@ -12,8 +12,12 @@ class objPosArrayList
         int listSize;
         int arrayCapacity;
 
+        const int defaultSize = 20;
+
     public:
         objPosArrayList();
+        objPosArrayList(const objPosArrayList&);    // Copy constructor
+        objPosArrayList& operator=(const objPosArrayList&); // copy overload
         ~objPosArrayList();
 
         int getSize() const;
