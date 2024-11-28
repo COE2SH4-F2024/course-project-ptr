@@ -1,6 +1,9 @@
 #ifndef GAMEMECHS_H
 #define GAMEMECHS_H
 
+#define DEFAULT_BOARD_SIZE_X 30;
+#define DEFAULT_BOARD_SIZE_Y 15;
+
 #include <cstdlib>
 #include <time.h>
 
