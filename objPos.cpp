@@ -76,6 +76,16 @@ bool objPos::isPosEqual(const objPos* refPos) const
     return (refPos->pos->x == pos->x && refPos->pos->y == pos->y);
 }
 
+bool objPos::isPosEqual(int x, int y) const
+{
+    return (pos->x == x && pos->y == y);
+}
+
+bool objPos::isPosEqual(const objPos refPos) const
+{
+    return (pos->x == refPos.pos->x && pos->y == refPos.pos->y);
+}
+
 char objPos::getSymbolIfPosEqual(const objPos* refPos) const
 {
     if(isPosEqual(refPos))

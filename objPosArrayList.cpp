@@ -37,6 +37,7 @@ objPosArrayList& objPosArrayList::operator=(const objPosArrayList &oList)
             aList[i] = oList.getElement(i);
         }
     }
+    return *this;
 }
 
 objPosArrayList::~objPosArrayList()

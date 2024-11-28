@@ -3,6 +3,8 @@
 
 #define DEFAULT_BOARD_SIZE_X 30;
 #define DEFAULT_BOARD_SIZE_Y 15;
+#define MAXASCII 176 // -
+#define MINASCII 33 // !
 
 #include <cstdlib>
 #include <time.h>
@@ -41,7 +43,7 @@ class GameMechs
 
         int getBoardSizeX() const;
         int getBoardSizeY() const;
-        
+
         int getScore() const;
         void incrementScore();
         
