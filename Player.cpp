@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "MacUILib.h"
 
 
 Player::Player(GameMechs* thisGMRef)
@@ -108,6 +109,17 @@ void Player::movePlayer()
 
     playerPosList->insertHead(playerPos); // insert next position at head
     playerPosList->removeTail(); // remove last position in list
+    
+    for(int i = 1; i < playerPosList->getSize(); i++)
+    {
+        if(myDir != STOP){
+            if((playerPosList->getHeadElement()).isPosEqual((playerPosList)->getElement(i)))
+            {
+                mainGameMechsRef->setExitTrue();
+                mainGameMechsRef->setLoseFlag();
+            }
+        }
+    }   
 }
 
 Player::Dir Player::getDir()

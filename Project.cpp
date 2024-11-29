@@ -75,6 +75,7 @@ void RunLogic(void)
     if (PlayerPtr->checkFoodConsumption(FoodPtr))
     {
         PlayerPtr->increasePlayerLength();
+        GameMechsPtr->incrementScore();
     }
     
     // FoodPtr->generateFood(PlayerPtr->getPlayerPos());
@@ -118,12 +119,21 @@ void DrawScreen(void)
 
     
     MacUILib_printf("\nPress ESC to quit");
-    MacUILib_printf("\nPlayer at X = %d, Y = %d", PlayerPtr->getPlayerHeadPos().pos->x, PlayerPtr->getPlayerHeadPos().pos->y);   
+    MacUILib_printf("\nPlayer at X = %d, Y = %d", PlayerPtr->getPlayerHeadPos().pos->x, PlayerPtr->getPlayerHeadPos().pos->y);
+    MacUILib_printf("\nScore = %d", GameMechsPtr->getScore());
+    MacUILib_printf("\nSIZE OF SNAKE = %d", (PlayerPtr->getPlayerPos())->getSize());
+    for(int i = 1; i < (PlayerPtr->getPlayerPos())->getSize(); i++)
+    {
+        //MacUILib_printf("\nElement %d, X = %d, Y = %d",i,(PlayerPtr->getPlayerPos())->getElement(i).pos->x, (PlayerPtr->getPlayerPos())->getElement(i).pos->y);
+
+        //MacUILib_printf("Hello there : %d",(((PlayerPtr->getPlayerPos())->getElement(i).pos->x) == (PlayerPtr->getPlayerPos()->getHeadElement().pos->x)) && (((PlayerPtr->getPlayerPos())->getElement(i).pos->y) == (PlayerPtr->getPlayerPos()->getHeadElement().pos->y)));
+    }
+      
 }
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(DELAY_CONST); // 0.1s delay
+    MacUILib_Delay(10000); // 0.1s delay
 }
 
 
@@ -133,6 +143,8 @@ void CleanUp(void)
     MacUILib_printf("\e[?25h"); // show cursor  
     MacUILib_uninit();
 
+    if((GameMechsPtr->getLoseFlagStatus()))
+    {MacUILib_printf("\nGAME LOST");}
     delete GameMechsPtr;
     delete PlayerPtr;
     delete FoodPtr;
