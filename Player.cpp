@@ -134,9 +134,10 @@ void Player::setDir(Dir direction)
 
 bool Player::checkFoodConsumption(Food* foodRef)
 {
+    MacUILib_printf("checking food collision");
     if (this->getPlayerHeadPos().isPosEqual(foodRef->getFoodPos()))
     {
-        foodRef->generateFood(playerPosList);
+        MacUILib_printf("food collided");
         return true;
     }
 
@@ -149,5 +150,6 @@ bool Player::checkFoodConsumption(Food* foodRef)
 void Player::increasePlayerLength()
 {
     playerPosList->insertHead(playerPos); // insert next position at head
+    MacUILib_printf("length increased");
 }
 // More methods to be added

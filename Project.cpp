@@ -75,6 +75,7 @@ void RunLogic(void)
     if (PlayerPtr->checkFoodConsumption(FoodPtr))
     {
         PlayerPtr->increasePlayerLength();
+        FoodPtr->generateFood(PlayerPtr->getPlayerPos());
         GameMechsPtr->incrementScore();
     }
     
