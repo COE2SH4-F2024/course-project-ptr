@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define DELAY_CONST 100000
+#define DELAY_CONST 50000
 
 GameMechs* GameMechsPtr = NULL;
 Player* PlayerPtr = NULL;
@@ -97,7 +97,10 @@ void DrawScreen(void)
     // loop through entire game board area
     for(int y = 0; y < GameMechsPtr->getBoardSizeY() ; y++)
     {
-        if(y != 0){ MacUILib_printf("\n"); }
+        if(y != 0)
+        {
+            MacUILib_printf("\n"); 
+        }
         for(int x = 0; x < GameMechsPtr->getBoardSizeX() ; x++)
         {
             // game board border
@@ -116,7 +119,7 @@ void DrawScreen(void)
             {
                 if(FoodPtr->getFoodPos()->getElement(i).isPosEqual(x, y))
                 {
-                    //overwrite charachter with \b
+                    //overwrite character with \b
                     MacUILib_printf("%c%c", '\b', FoodPtr->getFoodPos()->getElement(i).getSymbol());
                 }
             }
@@ -124,7 +127,7 @@ void DrawScreen(void)
             // player
             for (int i = 0; i < PlayerPtr->getPlayerPos()->getSize(); i++)
             {
-                //overwrite charachter with \b
+                //overwrite character with \b
                 if(PlayerPtr->getPlayerPos()->getElement(i).isPosEqual(x, y))
                 {
                     MacUILib_printf("%c%c", '\b', PlayerPtr->getPlayerHeadPos().getSymbol());
