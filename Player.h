@@ -25,7 +25,7 @@ class Player
         objPosArrayList* getPlayerPos() const;     
         void updatePlayerDir();
         void movePlayer();
-        bool checkFoodConsumption(Food* foodRef);
+        bool checkFoodConsumption(Food* foodRef, objPos*);
         void increasePlayerLength();
 
         // More methods to be added here

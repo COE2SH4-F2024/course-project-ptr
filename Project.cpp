@@ -72,13 +72,18 @@ void RunLogic(void)
     }
     PlayerPtr->updatePlayerDir();
     PlayerPtr->movePlayer();
-    if (PlayerPtr->checkFoodConsumption(FoodPtr))
+    objPos food;
+    if (PlayerPtr->checkFoodConsumption(FoodPtr, &food))
     {
         PlayerPtr->increasePlayerLength();
+        if (food.symbol == '$') // special food increases lenght and score by 2
+        {
+            PlayerPtr->increasePlayerLength();
+            GameMechsPtr->incrementScore();
+        }
         FoodPtr->generateFood(PlayerPtr->getPlayerPos());
         GameMechsPtr->incrementScore();
     }
-    
     // FoodPtr->generateFood(PlayerPtr->getPlayerPos());
 }
 
@@ -96,15 +101,18 @@ void DrawScreen(void)
                 MacUILib_printf("#");
             }
 
-            // food
-            else if (FoodPtr->getFoodPos().isPosEqual(x, y))
-            {
-                MacUILib_printf("%c", (FoodPtr->getFoodPos()).symbol);
-            }
-
             else
             {
                 MacUILib_printf(" ");
+            }
+
+            // food
+            for (int i = 0; i < FoodPtr->getFoodPos()->getSize(); i++)
+            {
+                if(FoodPtr->getFoodPos()->getElement(i).isPosEqual(x, y))
+                {
+                    MacUILib_printf("%c%c", '\b', FoodPtr->getFoodPos()->getElement(i).getSymbol());
+                }
             }
 
             // player
@@ -134,18 +142,19 @@ void DrawScreen(void)
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(10000); // 0.1s delay
+    MacUILib_Delay(DELAY_CONST); // 0.1s delay
 }
 
 
 void CleanUp(void)
 {
     MacUILib_clearScreen();
+    if((GameMechsPtr->getLoseFlagStatus()))
+    {MacUILib_printf("\nGAME LOST");}
     MacUILib_printf("\e[?25h"); // show cursor  
     MacUILib_uninit();
 
-    if((GameMechsPtr->getLoseFlagStatus()))
-    {MacUILib_printf("\nGAME LOST");}
+    
     delete GameMechsPtr;
     delete PlayerPtr;
     delete FoodPtr;

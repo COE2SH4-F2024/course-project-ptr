@@ -132,24 +132,25 @@ void Player::setDir(Dir direction)
     myDir = direction;
 }
 
-bool Player::checkFoodConsumption(Food* foodRef)
+bool Player::checkFoodConsumption(Food* foodRef, objPos* food)
 {
-    MacUILib_printf("checking food collision");
-    if (this->getPlayerHeadPos().isPosEqual(foodRef->getFoodPos()))
+    //MacUILib_printf("checking food collision");
+    for (int i = 0; i < foodRef->getFoodPos()->getSize(); i++)
     {
-        MacUILib_printf("food collided");
-        return true;
+        if (this->getPlayerHeadPos().isPosEqual(foodRef->getFoodPos()->getElement(i)))
+        {
+            *food = foodRef->getFoodPos()->getElement(i);
+            //MacUILib_printf("food collided");
+            return true;
+        }
     }
 
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 void Player::increasePlayerLength()
 {
     playerPosList->insertHead(playerPos); // insert next position at head
-    MacUILib_printf("length increased");
+    //MacUILib_printf("length increased");
 }
 // More methods to be added
