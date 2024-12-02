@@ -8,9 +8,9 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
     playerPos.setObjPos(1,1, '*');
     playerPosList = new objPosArrayList;
-    initialBodyLength = 3;
 
-    for (int i = 0; i < initialBodyLength; i++)
+    // fill body with segments
+    for (int i = 0; i < INITIAL_BODY_LENGTH; i++)
     {
         playerPosList->insertHead(objPos(i+1, 1, '*'));
     }
@@ -77,6 +77,7 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
     
+    // check border collison and update position
     switch(myDir)
     {
         case UP:
@@ -110,9 +111,11 @@ void Player::movePlayer()
     playerPosList->insertHead(playerPos); // insert next position at head
     playerPosList->removeTail(); // remove last position in list
     
+    // check game end condition
     for(int i = 1; i < playerPosList->getSize(); i++)
     {
         if(myDir != STOP){
+            // check if head intersects body 
             if((playerPosList->getHeadElement()).isPosEqual((playerPosList)->getElement(i)))
             {
                 mainGameMechsRef->setExitTrue();
@@ -134,13 +137,12 @@ void Player::setDir(Dir direction)
 
 bool Player::checkFoodConsumption(Food* foodRef, objPos* food)
 {
-    //MacUILib_printf("checking food collision");
+    // check if head intersects any food items
     for (int i = 0; i < foodRef->getFoodPos()->getSize(); i++)
     {
         if (this->getPlayerHeadPos().isPosEqual(foodRef->getFoodPos()->getElement(i)))
         {
             *food = foodRef->getFoodPos()->getElement(i);
-            //MacUILib_printf("food collided");
             return true;
         }
     }
@@ -151,6 +153,5 @@ bool Player::checkFoodConsumption(Food* foodRef, objPos* food)
 void Player::increasePlayerLength()
 {
     playerPosList->insertHead(playerPos); // insert next position at head
-    //MacUILib_printf("length increased");
 }
 // More methods to be added

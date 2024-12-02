@@ -88,11 +88,6 @@ void objPosArrayList::removeTail()
     listSize--;
 }
 
-void objPosArrayList::clearArray()
-{
-    listSize = 0;
-}
-
 objPos objPosArrayList::getHeadElement() const
 {
     return aList[0];

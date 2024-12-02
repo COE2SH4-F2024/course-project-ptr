@@ -6,6 +6,8 @@
 #include "Food.h"
 #include "objPosArrayList.h"
 
+#define INITIAL_BODY_LENGTH 3
+
 class Player
 {
     // Construct the remaining declaration from the project manual.
@@ -35,7 +37,6 @@ class Player
         objPosArrayList* playerPosList;
         objPos playerPos; // Upgrade this in iteration 3.       
         enum Dir myDir;
-        int initialBodyLength;
 
         // Need a reference to the Main Game Mechanisms
         GameMechs* mainGameMechsRef;
